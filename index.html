@@ -4,8 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
 </head>
 <body>
+    
+    <div class="calculator">
+
+        <div class="container">
+            <div class="display-output">
+                <textarea wrap="off"></textarea>
+            </div>
+
+            <div class="keypad-1">
+                <button id="negate-button">±</button>
+                <button id="clear-button">AC</button>
+                <button id="delete-button">DEL</buttonn>
+            </div>
+
+            <div class="keypad-2">
+
+                <div class="numbers">
+
+                    <div class="row">
+                        <button id="number" value="7">7</button>
+                        <button id="number" value="8">8</button>
+                        <button id="number" value="9">9</button>
+                    </div>
+    
+                    <div class="row">
+                        <button id="number" value="4">4</button>
+                        <button id="number" value="5">5</button>
+                        <button id="number" value="6">6</button>
+                    </div>
+                   
+                    <div class="row">
+                        <button id="number" value="3">3</button>
+                        <button id="number" value="2">2</button>
+                        <button id="number" value="1">1</button>
+                    </div>
+                   
+                    <div class="row">
+                        <button id="decimal">.</button>
+                        <button id="number">0</button>
+                        <button id="percentage">%</button>
+                    </div>
+                    
+                </div>
+
+                <div class="operators">
+
+                    <button id="operator">+</button>
+                    <button id="operator">-</button>
+                    <button id="operator">/</button>
+                    <button id="operator">×</button>
+
+                </div>
+
+            </div>
+
+            <button id="equal-button">=</button>
+
+            
+        </div> 
+    </div>
     
 </body>
 </html>

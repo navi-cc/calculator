@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: 500;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(255, 255, 255);
+
+   
+}
+
+button {
+    cursor: pointer;
+}
+
+
+
+.calculator {
+    display: flex;
+    width: 400px;
+    height: auto;
+
+    box-shadow: 0px 0px 14px 10px rgba(0,0,0,0.9);
+    border-radius: 20px;
+    padding: 20px;
+
+    background-color: transparent;
+}
+
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    gap: 20px;
+}
+
+
+
+
+.display-output {
+    width: 100%;
+    height: 70px;
+}
+
+textarea {  
+    width: 100%;
+    height: inherit;
+    border: solid 2px rgb(22, 22, 22);
+    border-radius: 5px;
+    padding: 4px 0px 0px 0px;
+    
+    background-color: transparent;
+    resize: none;
+    outline: none;
+    overflow: hidden;
+
+    text-align: right;
+    font-size: 55px;
+    color: rgb(20, 20, 20);
+}
+
+
+
+.keypad-1 {
+    gap: 20px;
+    height: 50px;
+    display: flex;
+    flex-grow: 1;
+}
+
+.keypad-1 button {
+    border-radius: 50px;
+    border: none;
+
+    font-size: 20px;
+    color: aliceblue;
+
+}
+
+#negate-button {
+    flex-grow: 1.5;
+    background-color: rgb(34, 34, 34);
+}
+
+ #delete-button, #clear-button {
+    background-color: rgb(235, 159, 19);
+    flex-grow: 1;
+}
+
+
+
+.keypad-2 {
+    display: flex;
+    gap: 15px;
+}
+
+
+.row {
+    display: flex;
+    flex-grow: 1;
+    gap: 20px;
+}
+
+.numbers {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 70%;
+}
+
+
+#number, #decimal, #percentage {
+    border-radius: 250px;
+    outline: none;
+    padding: 20px 10px;
+
+    background-color: rgb(34, 34, 34);
+    border: solid 1px rgb(44, 44, 44);
+    
+    font-size: 18px;
+    color: white;
+
+    flex-grow: 1;
+}
+
+#percentage {
+    padding: 20px 5px;
+}
+
+.operators {
+    display: flex;
+    flex-direction: column;
+    
+    flex-grow: 1;
+    gap: 25px;
+}
+
+#operator {
+    border-radius: 40px;
+    border: none;
+    background-color: rgb(34 117 241);
+    
+    flex-grow: 1;
+    
+    font-size: 40px;
+    color: aliceblue;
+}
+
+
+
+#equal-button {
+    height: 70px;
+    font-size: 50px;
+    color: white;
+
+    border: none;
+    border-radius: 30px;
+    background-color: black;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
