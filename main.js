@@ -12,14 +12,15 @@ let num1 = '';
 let num2 = '';
 let operator = '';
 
-
 numberButton.forEach((number) => {
     number.addEventListener('mousedown', () => {
+
         currentValue += number.value;
         updateCurrentValue();
+        updateOutput();
+        
     });
 });
-
 
 operatorButton.forEach((operators) => {
     operators.addEventListener('mousedown', () => {
@@ -27,12 +28,18 @@ operatorButton.forEach((operators) => {
         if ((num1 && num2) && operator) operate();
 
         isOperatorClick = true
-        isDecimalButtonClick = false;
         operator = operators.value
-        currentValue = '';
         updateOutput();
+
     });
+
+    operators.addEventListener('mouseup', () => {
+        isDecimalButtonClick = false;
+        currentValue = '';
+    });
+
 });
+
 
 
 
@@ -65,12 +72,12 @@ function updateOutput() {
 
 }
 
+
 function operate() {
 
     num1 = Number(num1);
     num2 = Number(num2);
   
-
     switch (operator) {
 
         case '+':
@@ -91,8 +98,13 @@ function operate() {
        
     }
 
-    if (result === Infinity) result = 'Math Error';
+    if (result === Infinity) {
+        result = 'Math Error'
+        expression = '';
+        return;
+    }
 
+    result = round(result);
     num1 = result;
     num2 = '';   
     operator = '';
@@ -103,31 +115,51 @@ function operate() {
 
 }
 
-function updateCurrentValue() {
-
-    if (!isOperatorClick) {
-        num1 = currentValue
-    } else num2 = currentValue;
-
-    updateOutput();
-    
-}
 
 function addDecimal() {
     
     if (!isDecimalButtonClick) {
         
-        if (!currentValue) {
-            currentValue += '0.';
-        } else currentValue += '.';
-
+        checkCurrentValue()
         updateCurrentValue();
-
-        isDecimalButtonClick = true;
+        updateOutput();
 
     }
 
+    isDecimalButtonClick = true;
+
 }
+
+
+function round(value) {
+    var multiplier = Math.pow(10, 2);
+    return Math.round(value * multiplier) / multiplier;
+}
+
+
+function updateCurrentValue() {
+
+    if (!isOperatorClick) {
+        num1 = currentValue
+        return;
+    } 
+    
+    num2 = currentValue;
+   
+}
+
+
+function checkCurrentValue() {
+
+    if (!currentValue) {
+        currentValue += '0.';
+        return;
+    }    
+        
+    currentValue += '.';
+
+}
+
 
 function reset() {
 
