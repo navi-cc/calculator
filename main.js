@@ -4,7 +4,13 @@ const equalButton = document.querySelector('#equal-button')
 const clearButton = document.querySelector('#clear-button');
 const decimalButton = document.querySelector('#decimal');
 const percentageButton = document.querySelector('#percentage');
+const negateButton = document.querySelector('#negate-button')
 const output = document.querySelector('textarea');
+
+let result;
+let isOperatorClick;
+let isDecimalButtonClick;
+let isEqualButtonClick;
 
 let expression;
 let currentValue = '';
@@ -13,6 +19,7 @@ let num2 = '';
 let operator = '';
 
 numberButton.forEach((number) => {
+    
     number.addEventListener('mousedown', () => {
 
         currentValue += number.value;
@@ -20,9 +27,12 @@ numberButton.forEach((number) => {
         updateOutput();
         
     });
+
 });
 
+
 operatorButton.forEach((operators) => {
+    
     operators.addEventListener('mousedown', () => {
 
         if ((num1 && num2) && operator) operate();
@@ -34,22 +44,15 @@ operatorButton.forEach((operators) => {
     });
 
     operators.addEventListener('mouseup', () => {
+
         isDecimalButtonClick = false;
         currentValue = '';
+
     });
 
 });
 
 
-
-
-let result;
-let isOperatorClick;
-let isDecimalButtonClick;
-let isEqualButtonClick;
-
-decimalButton.addEventListener('mousedown', addDecimal);
-clearButton.addEventListener('mousedown', reset);
 equalButton.addEventListener('mouseup', () => isEqualButtonClick = false); 
 equalButton.addEventListener('mousedown', () => {
 
@@ -60,16 +63,24 @@ equalButton.addEventListener('mousedown', () => {
 });
 
 
+negateButton.addEventListener('mousedown', () => {
+
+    negate();
+    updateCurrentValue();
+    updateOutput();
+    
+});
+
+
+decimalButton.addEventListener('mousedown', addDecimal);
+clearButton.addEventListener('mousedown', reset);
+
+
 
 
 function updateOutput() {
-
     if (!isEqualButtonClick) expression = num1 + operator + num2;
-    
     output.textContent = expression || result;    
-    output.setSelectionRange(output.value.length, output.value.length);
-    output.focus();
-
 }
 
 
@@ -98,7 +109,7 @@ function operate() {
        
     }
 
-    if (result === Infinity) {
+    if (result === Infinity || result === -Infinity) {
         result = 'Math Error'
         expression = '';
         return;
@@ -113,27 +124,6 @@ function operate() {
     
     isOperatorClick = false;
 
-}
-
-
-function addDecimal() {
-    
-    if (!isDecimalButtonClick) {
-        
-        checkCurrentValue()
-        updateCurrentValue();
-        updateOutput();
-
-    }
-
-    isDecimalButtonClick = true;
-
-}
-
-
-function round(value) {
-    var multiplier = Math.pow(10, 2);
-    return Math.round(value * multiplier) / multiplier;
 }
 
 
@@ -158,6 +148,40 @@ function checkCurrentValue() {
         
     currentValue += '.';
 
+}
+
+
+function addDecimal() {
+    
+    if (!isDecimalButtonClick) {
+        
+        checkCurrentValue()
+        updateCurrentValue();
+        updateOutput();
+
+    }
+
+    isDecimalButtonClick = true;
+
+}
+
+
+function negate() {
+
+    if (!currentValue) currentValue = String(num1);
+ 
+    if (currentValue && !currentValue.includes('-')) {
+        currentValue = '-' + currentValue;
+        return;
+    }
+
+    currentValue = currentValue.slice(1);
+
+}
+
+
+function round(value) {
+    return Math.round(value * 100) / 100;
 }
 
 
