@@ -8,19 +8,22 @@
     <script src="main.js" defer></script>
 </head>
 <body>
-    
+
     <div class="calculator">
 
         <div class="container">
+
             <div class="display-output">
-                <textarea wrap="off"></textarea>
+                <textarea wrap="off" readonly></textarea>
             </div>
+
 
             <div class="keypad-1">
                 <button id="negate-button">±</button>
                 <button id="clear-button">AC</button>
-                <button id="delete-button">DEL</buttonn>
+                <button id="delete-button">DEL</button>
             </div>
+
 
             <div class="keypad-2">
 
@@ -46,7 +49,7 @@
                    
                     <div class="row">
                         <button id="decimal">.</button>
-                        <button id="number">0</button>
+                        <button id="number" value="0">0</button>
                         <button id="percentage">%</button>
                     </div>
                     
@@ -54,10 +57,10 @@
 
                 <div class="operators">
 
-                    <button id="operator">+</button>
-                    <button id="operator">-</button>
-                    <button id="operator">/</button>
-                    <button id="operator">×</button>
+                    <button id="operator" value="+">+</button>
+                    <button id="operator" value="-">-</button>
+                    <button id="operator" value="/">/</button>
+                    <button id="operator" value="×">×</button>
 
                 </div>
 
@@ -65,7 +68,6 @@
 
             <button id="equal-button">=</button>
 
-            
         </div> 
     </div>
     
