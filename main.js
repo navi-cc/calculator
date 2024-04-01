@@ -1,10 +1,11 @@
 const numberButton = document.querySelectorAll('#number');
 const operatorButton = document.querySelectorAll('#operator');
-const equalButton = document.querySelector('#equal-button')
+const equalButton = document.querySelector('#equal-button');
 const clearButton = document.querySelector('#clear-button');
+const deleteButton = document.querySelector('#delete-button')
 const decimalButton = document.querySelector('#decimal');
 const percentageButton = document.querySelector('#percentage');
-const negateButton = document.querySelector('#negate-button')
+const negateButton = document.querySelector('#negate-button');
 const output = document.querySelector('textarea');
 
 let result;
@@ -72,6 +73,24 @@ negateButton.addEventListener('mousedown', () => {
 });
 
 
+percentageButton.addEventListener('mousedown', () => {
+
+    currentValue /= 100;
+    updateCurrentValue();
+    updateOutput();
+
+});
+
+
+deleteButton.addEventListener('mousedown', () => {
+
+    currentValue = currentValue.slice(0, currentValue.length - 1);
+    updateCurrentValue();
+    updateOutput();
+
+});
+
+
 decimalButton.addEventListener('mousedown', addDecimal);
 clearButton.addEventListener('mousedown', reset);
 
@@ -115,6 +134,13 @@ function operate() {
         return;
     }
 
+    updateCurrentExpression();
+
+}
+
+
+function updateCurrentExpression() {
+    
     result = round(result);
     num1 = result;
     num2 = '';   
