@@ -19,88 +19,45 @@ let num1 = '';
 let num2 = '';
 let operator = '';
 
+const ADDITION = '+';
+const SUBTRACTION = '-';
+const MULTIPLICATION = '*';
+const DIVISION = '/';
+
 numberButton.forEach((number) => {
     
     number.addEventListener('mousedown', () => {
-
         currentValue += number.value;
         updateCurrentValue();
-        updateOutput();
-        
+        updateOutput();       
     });
 
 });
-
 
 operatorButton.forEach((operators) => {
     
     operators.addEventListener('mousedown', () => {
-
-        if ((num1 && num2) && operator) operate();
-
-        isOperatorClick = true
-        operator = operators.value
+        checkCurrentExpression();
+        isOperatorClick = true;
+        operator = operators.value;
         updateOutput();
-
     });
 
     operators.addEventListener('mouseup', () => {
-
         isDecimalButtonClick = false;
         currentValue = '';
-
     });
 
 });
 
-
 equalButton.addEventListener('mouseup', () => isEqualButtonClick = false); 
-equalButton.addEventListener('mousedown', () => {
-
-    isEqualButtonClick = true;
-    operate();
-    updateOutput();
-    
-});
-
-
-negateButton.addEventListener('mousedown', () => {
-
-    negate();
-    updateCurrentValue();
-    updateOutput();
-    
-});
-
-
-percentageButton.addEventListener('mousedown', () => {
-
-    currentValue /= 100;
-    updateCurrentValue();
-    updateOutput();
-
-});
-
-
-deleteButton.addEventListener('mousedown', () => {
-
-    currentValue = currentValue.slice(0, currentValue.length - 1);
-    updateCurrentValue();
-    updateOutput();
-
-});
-
-
+equalButton.addEventListener('mousedown', setResult);
+percentageButton.addEventListener('mousedown', setPercentage);
+negateButton.addEventListener('mousedown', negateValue);
 decimalButton.addEventListener('mousedown', addDecimal);
+deleteButton.addEventListener('mousedown', remove);
 clearButton.addEventListener('mousedown', reset);
-
-
-
-
-function updateOutput() {
-    if (!isEqualButtonClick) expression = num1 + operator + num2;
-    output.textContent = expression || result;    
-}
+document.addEventListener('keydown', setKey);
 
 
 function operate() {
@@ -136,6 +93,68 @@ function operate() {
 
     updateCurrentExpression();
 
+}
+
+
+function setKey(e) {
+    let keyValue = parseInt(e.key);
+
+    if (e.key === 'Enter' && (num1 && num2) && operator) {
+        setResult();
+        isEqualButtonClick = false;
+        return;
+    } 
+    
+    if (e.key === ADDITION || 
+        e.key === SUBTRACTION || 
+        e.key === MULTIPLICATION ||
+        e.key === DIVISION) {
+            checkCurrentExpression();
+            operator = e.key;
+            updateOutput();
+
+            isOperatorClick = true;
+            currentValue = '';
+            return;
+    }
+
+    if (e.key === 'Backspace') {
+        remove();
+        return;
+    }
+
+    if (isNaN(keyValue)) return;
+
+    currentValue += keyValue;
+    updateCurrentValue();
+    updateOutput();
+}
+
+
+function updateOutput() {
+    if (!isEqualButtonClick) expression = num1 + operator + num2;
+    output.textContent = expression || result;    
+}
+
+
+function setResult() {
+    isEqualButtonClick = true;
+    operate();
+    updateOutput();
+}
+
+
+function negateValue() {
+    negate();
+    updateCurrentValue();
+    updateOutput();
+}
+
+
+function setPercentage() {
+    currentValue /= 100;
+    updateCurrentValue();
+    updateOutput();
 }
 
 
@@ -176,24 +195,24 @@ function checkCurrentValue() {
 
 }
 
+function checkCurrentExpression() {
+    if ((num1 && num2) && operator) operate();
+}
+
 
 function addDecimal() {
-    
     if (!isDecimalButtonClick) {
-        
+    
         checkCurrentValue()
         updateCurrentValue();
         updateOutput();
-
     }
 
     isDecimalButtonClick = true;
-
 }
 
 
 function negate() {
-
     if (!currentValue) currentValue = String(num1);
  
     if (currentValue && !currentValue.includes('-')) {
@@ -202,7 +221,13 @@ function negate() {
     }
 
     currentValue = currentValue.slice(1);
+}
 
+
+function remove() {
+    currentValue = currentValue.slice(0, currentValue.length - 1);
+    updateCurrentValue();
+    updateOutput();
 }
 
 
@@ -212,7 +237,6 @@ function round(value) {
 
 
 function reset() {
-
     currentValue = '';
     num1 = '';
     num2 = '';
@@ -223,5 +247,4 @@ function reset() {
     isDecimalButtonClick = false;
 
     updateOutput();
-
 }
